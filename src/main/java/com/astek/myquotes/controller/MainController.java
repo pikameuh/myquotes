@@ -1,10 +1,7 @@
 package com.astek.myquotes.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import com.astek.myquotes.services.UsersService;
 
 @Controller
 public class MainController {	
@@ -18,4 +15,20 @@ public class MainController {
 	public String page() {
 		return "page1";
 	}
+	
+	@GetMapping({ "/search" })
+	public String open() {
+		return "open/searchQuote";
+	}
+	
+	@GetMapping({ "/contact" })
+	public String contact() {
+		return "open/contact";
+	}
+	
+	@GetMapping({ "/about" })
+	public String about() {
+		return "open/about";
+	}
+
 }

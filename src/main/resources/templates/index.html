@@ -1,87 +1,31 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
 <head>
-<meta charset="UTF-8">
-<title>My Quotes</title>
-
-<!-- <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-	crossorigin="anonymous"></script>
- -->
-
-<link rel="stylesheet" th:href="@{/main.css}"/> 
-<!--
-  <link rel="stylesheet" href="main.css"/>
- 
- <link href="main.css" rel="stylesheet">
-  -->
- 
-<!--  <style>
-body {background-color: powderblue;}
-h1   {color: blue;}
-p    {color: red;}
-
-.topright {
-	position: absolute;
-	top: 8px;
-	right: 16px;
-	font-size: 18px;
-}
-</style> -->
-
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="assets/js/headroom.min.js"></script>
-<script src="assets/js/jQuery.headroom.min.js"></script>
-<script src="assets/js/template.js"></script>
-
-
+<title>Welcome to Our Site</title>
 </head>
-
-
 <body>
-	<div class="container">
-		<div th:if="${param.logout}" class="alert alert-info">Deconnected</div>
+	<!-- 
+<div layout:fragment="content">
+    <section class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Welcome to Our Site</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur [....]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> -->
 
-		<div class="form-group">
-			<h1>Bienvenue dans MyQuotes</h1>
-
-
-			<a th:href="@{/login}" class='topright'>Login</a>
-			<!--  <a
-				th:href="@{/login}" class='btn btn-primary pull-right'>Login</a> -->
-		</div>
-
-
-
-
-		<!-- <h1>Bienvenue dans MyQuotes</h1> -->
-		</br> <span>Ici vous pouvez enregistrer et retrouver toutes vos
-			meilleurs citations et celles de vos amis </span> </br>
-		</br>
-		<!-- <a th:href="@{/page1}">page1</a> -->
-
-		</br> <a th:href="@{/login}">login</a>
-
-
-
+	<div layout:fragment="content">
+		<span>Ici vous pouvez enregistrer et retrouver toutes vos
+			meilleurs citations et celles de vos amis </span> </br> </br> <a
+			th:href="@{/search}" class="btn btn-outline-warning">chercher
+			une quote</a>
 	</div>
-
-
-
 
 </body>
 </html>
