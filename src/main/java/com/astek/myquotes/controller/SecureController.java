@@ -15,14 +15,14 @@ public class SecureController {
 	@Autowired
 	private UsersService userService;
 	
-	@GetMapping("/page1")
-	public String page1() {
-		return "secure/page1";
+	@GetMapping("/info")
+	public String info() {
+		return "secure/info";
 	}
 	
-	@GetMapping("/page2")
+	@GetMapping("/addquote")
 	public String page2(Model model) {
 		model.addAttribute("users", userService.findAll());
-		return "secure/page2";
+		return "secure/addquote";
 	}
 }

@@ -42,12 +42,12 @@
 		</table>
 		
 		<div class="form-group" sec:authorize="hasRole('ROLE_ADMIN')">
-			<a th:href="@{/secure/page1}" class="btn btn-outline-primary">Add</a>
-			<a th:href="@{/secure/page1}" class="btn btn-outline-warning">Delete</a>
+			<a th:href="@{/secure/info}" class="btn btn-outline-primary">Add</a>
+			<a th:href="@{/secure/info}" class="btn btn-outline-warning">Delete</a>
 		</div>			
 		
 		<div class="form-group">
-			<a th:href="@{/secure/page1}" class="btn btn-outline-secondary">retour</a>
+			<a th:href="@{/secure/info}" class="btn btn-outline-secondary">retour</a>
 			<a th:href="@{/logout}" class="btn btn-outline-warning">logout</a>
 		</div>
 		
