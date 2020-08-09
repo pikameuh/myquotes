@@ -8,6 +8,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.astek.myquotes.entitites.Utilisateur;
+import com.astek.myquotes.repositories.UtilisateurRepository;
+
+/**
+ * Gestion security : Utilisateur existe ?
+ * @author Astek
+ *
+ */
 @Service
 public class UtilisateurUserDetailsService implements UserDetailsService {
 

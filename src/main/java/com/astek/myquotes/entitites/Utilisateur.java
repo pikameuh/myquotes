@@ -1,4 +1,4 @@
-package com.astek.myquotes.security;
+package com.astek.myquotes.entitites;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,12 +19,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import com.astek.myquotes.security.Role;
 import com.astek.myquotes.utility.Utils;
 
 @Entity
 @Table(name = "UTILISATEUR")
 
-@SequenceGenerator(name="seqUtilisateur", sequenceName = "SEQ", initialValue = 1, allocationSize = 1) // nom obj java, nom seq ds DataBase, start, pas (icremente e 1)
+@SequenceGenerator(name="seqUtilisateur", sequenceName = "SEQ_UTILISATEUR", initialValue = 1, allocationSize = 1) // nom obj java, nom seq ds DataBase, start, pas (icremente e 1)
 @NamedQueries({
 	@NamedQuery(name = "Utilisateur.findAll", query = "select u from Utilisateur u"),
 	@NamedQuery(name = "Utilisateur.findByDtNaiss", query = "select u from Utilisateur u where u.dtNaiss=:dtNaiss")

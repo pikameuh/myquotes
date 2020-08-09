@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.astek.myquotes.security.Utilisateur;
-import com.astek.myquotes.security.UtilisateurRepository;
+import com.astek.myquotes.entitites.Utilisateur;
+import com.astek.myquotes.repositories.UtilisateurRepository;
 
 
 @Service
