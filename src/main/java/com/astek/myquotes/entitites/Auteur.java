@@ -1,7 +1,9 @@
 package com.astek.myquotes.entitites;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+
+import org.springframework.data.domain.Page;
 
 /**
  * [Nom/Prenom] OU [UserLogin]
@@ -52,14 +56,15 @@ public class Auteur {
 	@JoinColumn(name = "UTILISATEURE_ID", foreignKey = @ForeignKey(name = "UTILISATEURE_ID_FK"))
 	private Utilisateur utilisateur;
 	
-	@OneToMany(mappedBy = "id", fetch = FetchType.EAGER)
-	private List<Quote> quotes;
+//	@OneToMany(mappedBy = "id", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "auteur", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+	private Set<Quote> quotes;
 
-	public List<Quote> getQuotes() {
+	public Set<Quote> getQuotes() {
 		return quotes;
 	}
 
-	public void setQuotes(List<Quote> quotes) {
+	public void setQuotes(Set<Quote> quotes) {
 		this.quotes = quotes;
 	}
 

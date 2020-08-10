@@ -26,10 +26,10 @@ public class InitUtilisateur implements CommandLineRunner {
 
 	@Autowired
 	AuteurRepository auteurRepository;
-	
+
 	@Autowired
 	TagRepository tagRepository;
-	
+
 	@Autowired
 	QuoteRepository quoteRepository;
 
@@ -57,61 +57,82 @@ public class InitUtilisateur implements CommandLineRunner {
 
 		Auteur aHugo = new Auteur("victor", "hugo");
 		aHugo = auteurRepository.save(aHugo);
-		
+
 		Auteur aXXX = new Auteur("xxx", "xxxx");
 		aXXX = auteurRepository.save(aXXX);
-		
+
 		Tag tDrole = new Tag("drole", "quand c'est rigolo", uToto);
 		Tag tFou = new Tag("fou", "quand c'est la folie", uToto);
 		tDrole = tagRepository.save(tDrole);
-		tFou =  tagRepository.save(tFou);
+		tFou = tagRepository.save(tFou);
 		tFou.setDescription("les dingeuries quoi !");
-		tFou =  tagRepository.save(tFou);
-		
-		Quote q1 = new Quote("titre", "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019", aHugo);
+		tFou = tagRepository.save(tFou);
+
+		Quote q1 = new Quote("titre", "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019",
+				aHugo);
 		q1 = quoteRepository.save(q1);
-		
+
 		createQuotes(aHugo);
-				
-		
+
 		// ---
 		retrieveAuteursTests();
 		// ---
 		retrieveTagFromUtilisateur(uToto);
 		// ---
 		retrieveQuotesFromAuteur(aHugo);
-		
+
 	}
 	
-	private void createQuotes(Auteur auteur) throws ParseException {
-		Quote q1 = new Quote("De " + auteur.getPrenom(), "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019", auteur);
+	private static final String[] contexts = {
+			"il faisait beau",
+			"il faisait triste",
+			"c'etait où ?",
+			"qu'est ce qu'on a rigole !",
+			"c'est pas important :)"
+	};
+	private String randomContext(int i) {
+		return contexts[i%5];
+	}
+	
+	private static final String[] quotes = {
+			"Le cœur a ses raisons que la raison ne connaît pas.",
+			"Le souvenir, c'est la présence invisible",
+			"On va l'accrocher à un fil invisible. Un fil invisible, c'est comme un homme invisible, mais en forme de fil.",
+			"Un athéiste est un homme qui n'a pas de soutien invisible.",
+			"Pour se rendre invisible n'importe quel homme n'a pas de moyen plus sûr que de devenir pauvre."
+	};
+	private String randomQuote(int i) {
+		return quotes[i%5];
+	}
 
-		q1 = quoteRepository.save(q1);
-		
-		
-		
-		Quote q2 = new Quote("De " + auteur.getPrenom(), "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019", auteur);
-		q2 = quoteRepository.save(q2);
-		
-//
-//		Quote q3 = new Quote("De " + auteur.getPrenom(), "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019", auteur);
-//		q3 = quoteRepository.save(q3);
-//
-//		
-//		Quote q4 = new Quote("De " + auteur.getPrenom(), "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019", auteur);
-//		q4 = quoteRepository.save(q4);
+	private void createQuotes(Auteur auteur) throws ParseException {
+
+		Boolean b;
+		for (int i = 0; i < 250; i++) {
+
+			if (i % 3 == 0) {
+				b = Boolean.FALSE;
+			} else {
+				b = Boolean.TRUE;
+			}
+			Quote q1 = new Quote("De " + auteur.getPrenom() + " #" + i, randomQuote(i), randomContext(i), "a pairs", b,
+					"20/02/1884", "11/12/2019", auteur);
+
+			q1 = quoteRepository.save(q1);
+
+		}
 
 	}
 
 	private void retrieveQuotesFromAuteur(Auteur auteur) {
-		List<Quote> lQuote = quoteRepository.findAll();//quoteRepository.findByAuteur(auteur);
+		List<Quote> lQuote = quoteRepository.findAll();// quoteRepository.findByAuteur(auteur);
 		System.out.println("*******************************************");
 		System.out.println("        Quotes de " + auteur.toString());
 		System.out.println("*******************************************");
 		for (Quote q : lQuote) {
-			System.out.println(q.toString());			
+			System.out.println(q.toString());
 		}
-		
+
 	}
 
 	private void retrieveTagFromUtilisateur(Utilisateur uToto) {
@@ -120,9 +141,9 @@ public class InitUtilisateur implements CommandLineRunner {
 		System.out.println("        Tags de " + uToto.getPrenom());
 		System.out.println("*******************************************");
 		for (Tag t : lTagToto) {
-			System.out.println(t.toString());			
+			System.out.println(t.toString());
 		}
-		
+
 	}
 
 	private void retrieveAuteursTests() {
@@ -131,14 +152,14 @@ public class InitUtilisateur implements CommandLineRunner {
 		int i = 0;
 		for (Auteur a : auteursList) {
 			//
-			if(a.getNom() != null && a.getPrenom() != null) {
+			if (a.getNom() != null && a.getPrenom() != null) {
 				System.out.println("Auteur " + (i++) + " n'est pas un utilisateur : " + a.toString());
-			}else if (a.getUtilisateur() != null) {
+			} else if (a.getUtilisateur() != null) {
 				System.out.println("Auteur " + (i++) + " est un utilisateur : " + a.toString());
 			} else {
 				System.out.println("Probleme avec l'Auteur " + (i++) + " tout est null..");
 			}
-			
+
 		}
 	}
 

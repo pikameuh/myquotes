@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,8 +53,10 @@ public class Quote {
 	@Column(name="QUOTE_DATE_CREATION")
 	private Date dtCreation;
 	
-	@ManyToOne
-	@JoinColumn(name = "id", foreignKey = @ForeignKey(name = "AUTEUR_ID_FK"))
+//	@ManyToOne
+//	@JoinColumn(name = "id", foreignKey = @ForeignKey(name = "AUTEUR_ID_FK"))
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "auteur_id", nullable = false)
 	private Auteur auteur;	
 	
 	
