@@ -6,4 +6,5 @@ import com.astek.myquotes.entitites.Auteur;
 
 public interface AuteurRepository extends JpaRepository<Auteur, Integer> {
 
+	
 }

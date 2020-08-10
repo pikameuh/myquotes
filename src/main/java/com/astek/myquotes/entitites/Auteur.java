@@ -1,12 +1,16 @@
 package com.astek.myquotes.entitites;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -47,6 +51,17 @@ public class Auteur {
 	@OneToOne
 	@JoinColumn(name = "UTILISATEURE_ID", foreignKey = @ForeignKey(name = "UTILISATEURE_ID_FK"))
 	private Utilisateur utilisateur;
+	
+	@OneToMany(mappedBy = "id", fetch = FetchType.EAGER)
+	private List<Quote> quotes;
+
+	public List<Quote> getQuotes() {
+		return quotes;
+	}
+
+	public void setQuotes(List<Quote> quotes) {
+		this.quotes = quotes;
+	}
 
 	@Version
 	private int version;

@@ -40,11 +40,12 @@
 	</div> -->
 
 	<!-- Couleur de nav bar en fonction de 'anonymousUser' ?  -->
-	<nav class="navbar navbar-expand-md" th:classappend="${(#authentication.getPrincipal() == 'anonymousUser')? 'navbar-light':'navbar-light'}" 
-										 th:styleappend="${(#authentication.getPrincipal() == 'anonymousUser')? 'background-color: #e3d2bd;':'background-color: #e3d2ae;'}">
+	<nav class="navbar navbar-expand-md"
+		th:classappend="${(#authentication.getPrincipal() == 'anonymousUser')? 'navbar-light':'navbar-light'}"
+		th:styleappend="${(#authentication.getPrincipal() == 'anonymousUser')? 'background-color: #e3d2bd;':'background-color: #e3d2ae;'}">
 
-	<!-- Main Navigation -->
-	<!-- <nav class="navbar navbar-expand-md navbar-dark bg-primary"> -->
+		<!-- Main Navigation -->
+		<!-- <nav class="navbar navbar-expand-md navbar-dark bg-primary"> -->
 		<a class="navbar-brand" th:href="@{/}">MyQuotes</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbar" aria-controls="navbar" aria-expanded="false"
@@ -76,6 +77,10 @@
 
 			<!-- NAVBAR GENERIQUE -->
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"
+					th:classappend="${((#httpServletRequest.getRequestURI() == '/secure/addquote'))? ' active':''}"><a
+					class="nav-link" th:href="@{/secure/addquote}" sec:authorize="isFullyAuthenticated()">Créer quote</a></li>
+
 				<li class="nav-item"
 					th:classappend="${((#httpServletRequest.getRequestURI() == '/index') or (#httpServletRequest.getRequestURI() == '/') )? ' active':''}"><a
 					class="nav-link" th:href="@{/}">Accueil</a></li>

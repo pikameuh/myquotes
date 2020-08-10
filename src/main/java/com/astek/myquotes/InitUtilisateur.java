@@ -1,5 +1,6 @@
 package com.astek.myquotes;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.astek.myquotes.entitites.Auteur;
+import com.astek.myquotes.entitites.Quote;
 import com.astek.myquotes.entitites.Tag;
 import com.astek.myquotes.entitites.Utilisateur;
 import com.astek.myquotes.repositories.AuteurRepository;
+import com.astek.myquotes.repositories.QuoteRepository;
 import com.astek.myquotes.repositories.TagRepository;
 import com.astek.myquotes.repositories.UtilisateurRepository;
 import com.astek.myquotes.security.Role;
@@ -26,6 +29,9 @@ public class InitUtilisateur implements CommandLineRunner {
 	
 	@Autowired
 	TagRepository tagRepository;
+	
+	@Autowired
+	QuoteRepository quoteRepository;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -52,6 +58,9 @@ public class InitUtilisateur implements CommandLineRunner {
 		Auteur aHugo = new Auteur("victor", "hugo");
 		aHugo = auteurRepository.save(aHugo);
 		
+		Auteur aXXX = new Auteur("xxx", "xxxx");
+		aXXX = auteurRepository.save(aXXX);
+		
 		Tag tDrole = new Tag("drole", "quand c'est rigolo", uToto);
 		Tag tFou = new Tag("fou", "quand c'est la folie", uToto);
 		tDrole = tagRepository.save(tDrole);
@@ -59,10 +68,49 @@ public class InitUtilisateur implements CommandLineRunner {
 		tFou.setDescription("les dingeuries quoi !");
 		tFou =  tagRepository.save(tFou);
 		
+		Quote q1 = new Quote("titre", "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019", aHugo);
+		q1 = quoteRepository.save(q1);
+		
+		createQuotes(aHugo);
+				
+		
 		// ---
 		retrieveAuteursTests();
 		// ---
 		retrieveTagFromUtilisateur(uToto);
+		// ---
+		retrieveQuotesFromAuteur(aHugo);
+		
+	}
+	
+	private void createQuotes(Auteur auteur) throws ParseException {
+		Quote q1 = new Quote("De " + auteur.getPrenom(), "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019", auteur);
+
+		q1 = quoteRepository.save(q1);
+		
+		
+		
+		Quote q2 = new Quote("De " + auteur.getPrenom(), "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019", auteur);
+		q2 = quoteRepository.save(q2);
+		
+//
+//		Quote q3 = new Quote("De " + auteur.getPrenom(), "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019", auteur);
+//		q3 = quoteRepository.save(q3);
+//
+//		
+//		Quote q4 = new Quote("De " + auteur.getPrenom(), "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019", auteur);
+//		q4 = quoteRepository.save(q4);
+
+	}
+
+	private void retrieveQuotesFromAuteur(Auteur auteur) {
+		List<Quote> lQuote = quoteRepository.findAll();//quoteRepository.findByAuteur(auteur);
+		System.out.println("*******************************************");
+		System.out.println("        Quotes de " + auteur.toString());
+		System.out.println("*******************************************");
+		for (Quote q : lQuote) {
+			System.out.println(q.toString());			
+		}
 		
 	}
 
