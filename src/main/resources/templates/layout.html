@@ -13,7 +13,7 @@
 <!-- Imports externes -->
 <link rel="icon" type="image/png"
 	href="https://img.icons8.com/nolan/64/bee.png" />
-	
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -32,10 +32,19 @@
 </head>
 <body>
 
+	<!-- <div class="form-group">
+		<div class="button-group">
+			<a th:href="@{/logout}" class="btn"
+				th:classappend="${(#authentication.getPrincipal() == 'anonymousUser')? 'btn-outline-warning':'btn-outline-success'}">logout</a>
+		</div>
+	</div> -->
 
+	<!-- Couleur de nav bar en fonction de 'anonymousUser' ?  -->
+	<nav class="navbar navbar-expand-md" th:classappend="${(#authentication.getPrincipal() == 'anonymousUser')? 'navbar-light':'navbar-light'}" 
+										 th:styleappend="${(#authentication.getPrincipal() == 'anonymousUser')? 'background-color: #e3d2bd;':'background-color: #e3d2ae;'}">
 
 	<!-- Main Navigation -->
-	<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+	<!-- <nav class="navbar navbar-expand-md navbar-dark bg-primary"> -->
 		<a class="navbar-brand" th:href="@{/}">MyQuotes</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbar" aria-controls="navbar" aria-expanded="false"
@@ -54,23 +63,32 @@
 						aria-haspopup="true" aria-expanded="false"> Actions </a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" th:href="@{/search}">Chercher</a> 
-							<a sec:authorize="isFullyAuthenticated()" class="dropdown-item" th:href="@{/secure/info}">Mon profil</a>
-							<a sec:authorize="isFullyAuthenticated()" class="dropdown-item" th:href="@{/secure/addquote}">Créer une nouvelle quote</a> 
-							<a sec:authorize="isFullyAuthenticated()" class="dropdown-item" th:href="@{/logout}">Deconnexion</a>
+							<a class="dropdown-item" th:href="@{/search}">Chercher</a> <a
+								sec:authorize="isFullyAuthenticated()" class="dropdown-item"
+								th:href="@{/secure/info}">Mon profil</a> <a
+								sec:authorize="isFullyAuthenticated()" class="dropdown-item"
+								th:href="@{/secure/addquote}">Créer une nouvelle quote</a> <a
+								sec:authorize="isFullyAuthenticated()" class="dropdown-item"
+								th:href="@{/logout}">Deconnexion</a>
 						</div></li>
 				</ul>
 			</div>
 
 			<!-- NAVBAR GENERIQUE -->
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item" th:classappend="${((#httpServletRequest.getRequestURI() == '/index') or (#httpServletRequest.getRequestURI() == '/') )? ' active':''}" ><a class="nav-link" th:href="@{/}">Accueil</a></li>
-				<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/contact' ? ' active':''}"><a class="nav-link" th:href="@{/contact}">Nous
-						contacter</a></li>
-				<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? ' active':''}"><a class="nav-link" th:href="@{/about}">A
-						propos</a></li>
-				<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? ' active':''}" sec:authorize="!isFullyAuthenticated()"><a
-					th:href="@{/login}" class="nav-link">Connexion</a></li>
+				<li class="nav-item"
+					th:classappend="${((#httpServletRequest.getRequestURI() == '/index') or (#httpServletRequest.getRequestURI() == '/') )? ' active':''}"><a
+					class="nav-link" th:href="@{/}">Accueil</a></li>
+				<li class="nav-item"
+					th:classappend="${#httpServletRequest.getRequestURI() == '/contact' ? ' active':''}"><a
+					class="nav-link" th:href="@{/contact}">Nous contacter</a></li>
+				<li class="nav-item"
+					th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? ' active':''}"><a
+					class="nav-link" th:href="@{/about}">A propos</a></li>
+				<li class="nav-item"
+					th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? ' active':''}"
+					sec:authorize="!isFullyAuthenticated()"><a th:href="@{/login}"
+					class="nav-link">Connexion</a></li>
 				<li class="nav-item" sec:authorize="isFullyAuthenticated()"><a
 					th:href="@{/logout}" class="nav-link">Deconnexion</a></li>
 			</ul>

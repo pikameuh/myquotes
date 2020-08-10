@@ -9,11 +9,13 @@
 		<version>2.3.2.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>formation.alten</groupId>
-	<artifactId>exoSec</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<groupId>com.astek</groupId>
+	<artifactId>myquotes</artifactId>
+	<version>0.0.3</version>
+
 	<name>exoSec</name>
-	<description>Demo project for Spring Boot</description>
+	<packaging>jar</packaging>
+	<description>Demo myquotes project with Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -80,10 +82,20 @@
 	</dependencies>
 
 	<build>
+		2
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<fork>true</fork>
+					<executable>C:\Program Files\Java\jdk1.8.0_201\bin\javac</executable>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
