@@ -1,54 +1,39 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
 <head>
-<meta charset="UTF-8">
-<title>My Quotes</title>
-
-<link th:href="@{/css/main.css}" rel="stylesheet" >
-    
-<link rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-    crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-<script
-    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-<script
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+<title>MyQuotes - Accueil</title>
 
 </head>
-
-
 <body>
-    <div class="container">
-        <div th:if="${param.logout}" class="alert alert-info">Deconnected</div>
 
-        <div class="form-group">
-            <h1>Bienvenue dans MyQuotes</h1>
+	<div layout:fragment="content">
 
-            <div class="form-group">
-                <div class="button-group" sec:authorize="!isFullyAuthenticated()">
-                    <a th:href="@{/login}" class="btn btn-outline-success topright">login</a>
-                </div>
-                <div class="button-group" sec:authorize="isFullyAuthenticated()">
-                    <a th:href="@{/logout}" class="btn btn-outline-warning topright">logout</a>
-                </div>
+</br></br></br></br></br>
+		<ul>
+		
+			<blockquote th:each="quote:${quotes}">
+			<img th:src="@{img/avatars/avatar1.png}" class="avatar-quote"  width="50" height="50"/>
+			<small class="dddate">[ [[${quote.dtEvenement}]] ] </small>
+				
+				<b><i class="titre">[[${quote.titre}]]:</i></b>
+				<p>
+					<b>[[${quote.value}]]</b>
+				</p>
+				<footer>
+					~ [[${quote.auteur.prenom}]] [[${quote.auteur.nom}]], <cite>[[${quote.contexte}]]
 
-                </br> <span>Ici vous pouvez enregistrer et retrouver toutes vos
-                    meilleurs citations et celles de vos amis </span> </br> </br> <a
-                    th:href="@{/open/search}" class="btn btn-outline-warning">chercher
-                    une quote</a>
-            </div>
-        </div>
+						
+					</cite>
+				</footer>
+			</blockquote>
+		</ul>
+	</div>
 
-    </div>
- <img th:src="@{/css/images/blockquote.png}"/> 
-<img th:src="@{/img/img.jpg}"/> 
+
 
 </body>
 </html>
+
+
