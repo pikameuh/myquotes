@@ -2,6 +2,17 @@
 h1   {color: blue;}
 p    {color: red;} */
 
+blockquote
+{
+  font-style:normal;
+  margin-left:32px;
+  font-family:"Segoe Print", "Times New Roman", Verdana;
+  padding-left: 48;
+  background:url('/css/images/blockquote.png');
+  background-repeat:no-repeat;
+  min-height: 30px;  
+}
+
 .topright {
 	position: absolute;
 	top: 8px;
@@ -23,3 +34,9 @@ p    {color: red;} */
         }
     }
 }
+
+
+
+
+/* --------------------*/
+  

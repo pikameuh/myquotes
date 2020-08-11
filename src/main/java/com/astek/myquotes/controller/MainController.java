@@ -13,7 +13,7 @@ public class MainController {
 	@Autowired
 	QuoteRepository quoteRepository;
 
-	@GetMapping({ "", "/", "/index" , "/css/**", "/img/**" })
+	@GetMapping({ "", "/", "/index" , "/css/**", "/img/**", "/js/**" })
 	public String index(Model model) {
 		model.addAttribute("quotes", quoteRepository.findByPrivee(Boolean.TRUE));
 		return "index";

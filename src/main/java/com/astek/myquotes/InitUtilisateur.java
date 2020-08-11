@@ -68,10 +68,6 @@ public class InitUtilisateur implements CommandLineRunner {
 		tFou.setDescription("les dingeuries quoi !");
 		tFou = tagRepository.save(tFou);
 
-		Quote q1 = new Quote("titre", "lalala", "il faisait beau", "a pairs", Boolean.TRUE, "20/02/1884", "11/12/2019",
-				aHugo);
-		q1 = quoteRepository.save(q1);
-
 		createQuotes(aHugo);
 
 		// ---
