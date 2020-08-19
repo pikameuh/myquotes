@@ -10,30 +10,44 @@
 
 	<div layout:fragment="content">
 
-</br></br></br></br></br>
+		</br>
+		</br>
+		</br>
+		</br>
+		</br>
 		<ul>
-		
-			<blockquote th:each="quote:${quotes}">
-			<img th:src="@{img/avatars/avatar1.png}" class="avatar-quote"  width="50" height="50"/>
-			<small class="dddate">[ [[${quote.dtEvenement}]] ] </small>
+
+			<blockquote th:each="quote:${quotes}" class="color-div"
+				th:styleappend="${quote.privee} ? 'background:white;':'background:gray;'">
+				<img th:src="@{img/avatars/avatar1.png}" class="avatar-quote" width="50" height="50" /> 
 				
-				<b><i class="titre">[[${quote.titre}]]:</i></b>
+					<small class="right" th:if="${quote.privee}">[publique]</small> 
+					<small class="right" th:if="${!quote.privee}">[privee]</small> 
+						<small class="dddate">[	[[${quote.dtEvenement}]] ] </small> 
+						
+					<b><i class="titre">[[${quote.titre}]]:</i></b>
 				<p>
 					<b>[[${quote.value}]]</b>
 				</p>
 				<footer>
 					~ [[${quote.auteur.prenom}]] [[${quote.auteur.nom}]], <cite>[[${quote.contexte}]]
 
-						
 					</cite>
+
 				</footer>
 			</blockquote>
 		</ul>
 	</div>
 
-
+	<!-- $(document).ready(function() {
+  var colors = ['red', 'blue', 'green', 'yellow', 'cyan', 'orange'];
+  var new_color = colors[Math.floor(Math.random() * colors.length)];
+  $('.color-div').css('background-color', new_color);
+}); -->
 
 </body>
 </html>
+
+
 
 

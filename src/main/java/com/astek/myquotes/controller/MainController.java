@@ -8,12 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.astek.myquotes.dao.DaoQuote;
 import com.astek.myquotes.entitites.Quote;
 import com.astek.myquotes.repositories.QuoteRepository;
 import com.astek.myquotes.services.QuotesService;
 
 @Controller
 public class MainController {	
+	
+	@Autowired
+	private DaoQuote daoQuote;
 	
 	@Autowired
 	QuoteRepository quoteRepository;
@@ -24,12 +28,14 @@ public class MainController {
 	@GetMapping({ "", "/", "/index" })
 	public String index(Model model, @Param("keyword") String keyword) {
 		if(keyword != null) {
-			List<Quote> quotes = quoteService.listAll(keyword);
+//			List<Quote> quotes = quoteService.listAll(keyword);
+			List<Quote> quotes = daoQuote.searchByKeyword(keyword);
 			model.addAttribute("quotes", quotes);
 			model.addAttribute("keyword", keyword);
 			return "index";
 		}else {
-			model.addAttribute("quotes", quoteRepository.findByPrivee(Boolean.TRUE));
+			//model.addAttribute("quotes", quoteRepository.findByPrivee(Boolean.TRUE));
+			model.addAttribute("quotes", daoQuote.findRandomQuote(Boolean.FALSE));
 			return "index";
 		}
 		

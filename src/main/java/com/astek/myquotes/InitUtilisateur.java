@@ -111,7 +111,7 @@ public class InitUtilisateur implements CommandLineRunner {
 			} else {
 				b = Boolean.TRUE;
 			}
-			Quote q1 = new Quote("De " + auteur.getPrenom() + " #" + i, randomQuote(i), randomContext(i), "a pairs", b,
+			Quote q1 = new Quote("De  #" + i, randomQuote(i), randomContext(i), "a pairs", b,
 					"20/02/1984", "11/12/2019", auteur);
 
 			q1 = quoteRepository.save(q1);

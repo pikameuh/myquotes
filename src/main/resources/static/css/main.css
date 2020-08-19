@@ -1,6 +1,7 @@
-/* body {background-color: powderblue;}
+/* 
 h1   {color: blue;}
 p    {color: red;} */
+
 
 .author
 {
@@ -9,6 +10,12 @@ p    {color: red;} */
 }
 
 .dddate
+{
+  float:right;
+  clear:both;
+}
+
+.right
 {
   float:right;
   clear:both;
@@ -34,10 +41,12 @@ blockquote
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   border-radius:10px;
-  background:white;
+  /* background:white; */
   border:2px solid black;
   min-height:64px;
 }
+
+
 
 blockquote:after 
 {
@@ -47,6 +56,7 @@ blockquote:after
   display:block; 
   top:48px; 
   background: url('https://www.xul.fr/css/images/bubble.png') no-repeat;
+  
   width:48px;
   height:20px;
   padding:0;
