@@ -41,6 +41,12 @@ public class MainController {
 		
 		
 	}
+	
+	
+	@GetMapping("/register")
+	public String register() {
+		return "register";
+	}
 
 	@GetMapping("/page1")
 	public String page() {

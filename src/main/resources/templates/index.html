@@ -9,16 +9,19 @@
 <body>
 
 	<div layout:fragment="content">
+	
+			
 
 		</br>
 		</br>
 		</br>
+		<a th:href="@{/}" class="btn btn-outline-primary">Random quote</a>
 		</br>
 		</br>
+		
 		<ul>
 
-			<blockquote th:each="quote:${quotes}" class="color-div"
-				th:styleappend="${quote.privee} ? 'background:white;':'background:gray;'">
+			<blockquote th:each="quote:${quotes}" class="color-div" th:styleappend="${quote.privee} ? 'background:white;':'background:gray;'">
 				<img th:src="@{img/avatars/avatar1.png}" class="avatar-quote" width="50" height="50" /> 
 				
 					<small class="right" th:if="${quote.privee}">[publique]</small> 
