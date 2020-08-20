@@ -17,6 +17,7 @@ public class UsersService {
 
 	// insert ou update
 	public void save(Utilisateur users) {
+		System.out.println("try to save Utilisateur : " + users.toString());
 		usersRepository.save(users);
 	}
 
@@ -34,6 +35,15 @@ public class UsersService {
 
 	public Utilisateur findById(String id) {
 		Optional<Utilisateur> opt = usersRepository.findByLogin(id);
+		if (opt.isPresent()) {
+			return opt.get();
+		}
+		return new Utilisateur();
+
+	}
+	
+	public Utilisateur findByEmail(String mail) {
+		Optional<Utilisateur> opt = usersRepository.findByEmail(mail);
 		if (opt.isPresent()) {
 			return opt.get();
 		}

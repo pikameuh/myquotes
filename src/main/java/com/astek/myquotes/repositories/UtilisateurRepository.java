@@ -9,5 +9,7 @@ import com.astek.myquotes.entitites.Utilisateur;
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Integer> {
 	Optional<Utilisateur> findByLogin(String login);
 	
+	Optional<Utilisateur> findByEmail(String email);
+	
 	void deleteByLogin(String login);
 }

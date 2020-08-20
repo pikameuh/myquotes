@@ -49,6 +49,12 @@ public class Utilisateur {
 	@Column(name="UTILISATEUR_PASSWORD", nullable = false)
 	private String password;
 	
+	@Column(name="UTILISATEUR_EMAIL", length = 150, nullable = false)
+	private String email;
+	
+	@Column(name="UTILISATEUR_ACTIVEE", nullable = false)
+	private Boolean enable;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name="UTILISATEUR_DATE_NAISSANCE")
 	private Date dtNaiss;
@@ -71,13 +77,15 @@ public class Utilisateur {
 
 	}
 
-	public Utilisateur(String prenom, String nom, String login, String password, String dtNaiss, String dateCrea,
+	public Utilisateur(String prenom, String nom, String login, String password, String email, Boolean enable, String dtNaiss, String dateCrea,
 			Role role) throws ParseException {
 		super();
 		this.prenom = prenom;
 		this.nom = nom;
 		this.login = login;
 		this.password = password;
+		this.email = email;
+		this.enable = enable;
 		this.dtNaiss = Utils.sdf.parse(dtNaiss);
 		this.dtCreation = Utils.sdf.parse(dateCrea);
 		this.role = role;
@@ -147,8 +155,23 @@ public class Utilisateur {
 
 	public void setDtCreation(Date dtCreation) {
 		this.dtCreation = dtCreation;
-	}	
-	
+	}		
+
+	public Boolean getEnable() {
+		return enable;
+	}
+
+	public void setEnable(Boolean enable) {
+		this.enable = enable;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public int getVersion() {
 		return version;
@@ -157,7 +180,7 @@ public class Utilisateur {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -183,4 +206,11 @@ public class Utilisateur {
 		return true;
 	}
 
+	public boolean isEmpty() {
+		if (getLogin() == null) {
+			return true;
+		}
+		
+		return false;
+	}
 }

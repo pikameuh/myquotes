@@ -44,11 +44,11 @@ public class InitUtilisateur implements CommandLineRunner {
 //		u = new Utilisateur("admin", "admin", passwordEncoder.encode("admin"), Role.ROLE_ADMIN);
 //		utilisateurRepository.save(u);
 
-		Utilisateur uToto = new Utilisateur("toto", "toto", "toto", passwordEncoder.encode("toto"), "25/07/19990",
+		Utilisateur uToto = new Utilisateur("toto", "toto", "toto", "toto@gmail.com", passwordEncoder.encode("toto"), Boolean.TRUE, "25/07/19990",
 				"08/08/2020", Role.ROLE_USER);
 		uToto = utilisateurRepository.save(uToto);
 
-		Utilisateur uAdmin = new Utilisateur("admin", "admin", "admin", passwordEncoder.encode("admin"), "25/07/19990",
+		Utilisateur uAdmin = new Utilisateur("admin", "admin", "admin", "admin@gmail.com", passwordEncoder.encode("admin"), Boolean.TRUE, "25/07/19990",
 				"08/08/2020", Role.ROLE_ADMIN);
 		uAdmin = utilisateurRepository.save(uAdmin);
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>MyQuotes - Nouveau compte</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				<h1>yoooooo !</h1>
+				</br>
+				<form th:action="@{/user/save}" th:object="${user}" method="post">
+			<div class="form-group">
+				<label for="login">login:</label> <input th:field="*{login}"
+					th:readonly="*{login}" class="form-control">
+				<div th:if="${#fields.hasErrors('login')}"
+					class="alert alert-danger">login obligatoire</div>
+			</div>
+			<div class="form-group">
+				<label for="email">email:</label> <input th:field="*{email}"
+					th:readonly="*{email}" class="form-control">
+				<div th:if="${#fields.hasErrors('email')}"
+					class="alert alert-danger">email obligatoire</div>
+			</div>
+			<div class="form-group">
+				<label for="prenom">prenom:</label> <input th:field="*{prenom}"
+					class="form-control" required>
+				<div th:if="${#fields.hasErrors('prenom')}"
+					class="alert alert-danger">prenom obligatoire</div>
+			</div>
+			<div class="form-group">
+				<label for="nom">nom:</label> <input class="form-control"
+					th:field="*{nom}" required>
+				<div th:if="${#fields.hasErrors('nom')}" class="alert alert-danger">nom
+					obligatoire</div>
+			</div>
+			<div class="form-group">
+				<label for="password">mot de passe:</label> <input type="password"
+					class="form-control" th:field="*{password}" required>
+				<div th:if="${#fields.hasErrors('password')}"
+					class="alert alert-danger">password obligatoire</div>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-outline-success">enregistrer</button>
+				<a th:href="@{/user/list}" class="btn btn-outline-warning">annuler</a>
+			</div>
+		</form>
+			</div>
+		</section>
+	</div>
+</body>
+</html>
