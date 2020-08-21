@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.astek.myquotes.entitites.Quote;
 import com.astek.myquotes.repositories.QuoteRepository;
-import com.astek.myquotes.utils.Log;
+import com.astek.myquotes.utility.Log;
 
 @Repository
 public class DaoQuoteImpl implements DaoQuote {

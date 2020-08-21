@@ -1,17 +1,21 @@
 package com.astek.myquotes.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +26,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.astek.myquotes.entitites.ConfirmationToken;
 import com.astek.myquotes.entitites.Utilisateur;
 import com.astek.myquotes.repositories.ConfirmationTokenRepository;
-import com.astek.myquotes.repositories.UtilisateurRepository;
 import com.astek.myquotes.security.Role;
 import com.astek.myquotes.services.EmailSenderService;
 import com.astek.myquotes.services.UsersService;
+import com.astek.myquotes.utility.Log;
+import com.astek.myquotes.utility.ResBundle;
 
 @Controller
 @RequestMapping("/user")
@@ -88,6 +93,10 @@ public class UserController {
 
 	@PostMapping("/save")
 	public String save(@Valid @ModelAttribute("user") Utilisateur user, BindingResult br, Model model) {
+		
+		Log.debug("dtNaiss : " + user.getDtNaiss().toString());
+		
+		
 		if (br.hasErrors()) {
 			return goEdit(user, model);
 		}
@@ -101,25 +110,28 @@ public class UserController {
 			user.setRole(Role.ROLE_USER);
 			user.setEnable(Boolean.FALSE);
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
-			userService.save(user);
+			userService.save(user);			
+			
 
 			// Send email confirmation
-
 			ConfirmationToken confirmationToken = new ConfirmationToken(user);
 
 			confirmationTokenRepository.save(confirmationToken);
 
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setTo(user.getEmail());
-			mailMessage.setSubject("Complete Registration!");
-			mailMessage.setFrom("myquote-registration@gmail.com");
-			mailMessage.setText("To confirm your account, please click here : "
-					+ "http://localhost:8080/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
-
+			mailMessage.setSubject("Finissez votre inscription "+ user.getLogin() +"!");
+			mailMessage.setFrom(ResBundle.getMyQuoteEmail());
+//			mailMessage.setText("To confirm your account, please click here : "
+//					+ "http://localhost:8080/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
+			
+			mailMessage.setText("Pour valider votre inscription cliquez sur le lien suivant : "
+					+ ResBundle.getUrl() + "/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
 			emailSenderService.sendEmail(mailMessage);
 
 //			modelAndView.addObject("emailId", user.getEmail());
 //			modelAndView.setViewName("successfulRegisteration");
+			return "redirect:/index?successfulregistrationemailsent=true";
 			
 
 		} else {
@@ -130,7 +142,7 @@ public class UserController {
 		}
 
 //		return "redirect:/user/list";
-		return "redirect:/";
+	//	return "redirect:/";
 	}
 	
 	@RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
@@ -151,7 +163,14 @@ public class UserController {
             modelAndView.setViewName("error");
         }
 
-        return "index";
-       // return modelAndView;
+        return "redirect:/index?successfulregistration=true";        
+    }
+	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
 }

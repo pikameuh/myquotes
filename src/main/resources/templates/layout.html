@@ -116,11 +116,11 @@
 	</nav>
 
 	<!-- Message en dessous de nav barre si deconnected -->
-	<div th:if="${param.logout}" class="alert alert-info">Vous êtes
-		deconnecté(e)</div>
-
-
-
+	</br></br></br>
+	<div th:if="${param.logout}" class="alert alert-info">Vous êtes	deconnecté(e) <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button></div>
+	<div th:if="${param.successfulregistrationemailsent}" class="alert alert-info">Email de confirmation d'inscription a été envoyé <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button></div>
+	<div th:if="${param.successfulregistration}" class="alert alert-success">Votre compte vient d'être activé <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button></div>
+	
 
 	<!-- Content Section -->
 	<section layout:fragment="content">

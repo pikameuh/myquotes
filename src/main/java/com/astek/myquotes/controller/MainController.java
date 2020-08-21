@@ -35,13 +35,11 @@ public class MainController {
 			return "index";
 		}else {
 			//model.addAttribute("quotes", quoteRepository.findByPrivee(Boolean.TRUE));
-			model.addAttribute("quotes", daoQuote.findRandomQuote(Boolean.FALSE));
+			model.addAttribute("quotes", daoQuote.findRandomQuote(Boolean.TRUE));
 			return "index";
 		}
 		
-		
-	}
-	
+	}	
 	
 	@GetMapping("/register")
 	public String register() {
