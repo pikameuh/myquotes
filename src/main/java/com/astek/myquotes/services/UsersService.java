@@ -43,7 +43,7 @@ public class UsersService {
 	}
 	
 	public Utilisateur findByEmail(String mail) {
-		Optional<Utilisateur> opt = usersRepository.findByEmail(mail);
+		Optional<Utilisateur> opt = usersRepository.findByEmail(mail.toLowerCase());
 		if (opt.isPresent()) {
 			return opt.get();
 		}

@@ -52,7 +52,7 @@ public class InitUtilisateur implements CommandLineRunner {
 				"08/08/2020", Role.ROLE_ADMIN);
 		uAdmin = utilisateurRepository.save(uAdmin);
 
-		Auteur aToto = new Auteur(uToto);
+		Auteur aToto = new Auteur(uToto.getPrenom(), uToto.getNom(), uToto);
 		aToto = auteurRepository.save(aToto);
 
 		Auteur aHugo = new Auteur("victor", "hugo");

@@ -213,4 +213,13 @@ public class Utilisateur {
 		
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [prenom=" + prenom + ", nom=" + nom + ", login=" + login + ", password=" + password
+				+ ", email=" + email + ", enable=" + enable + ", dtNaiss=" + dtNaiss + ", dtCreation=" + dtCreation
+				+ ", role=" + role + "]";
+	}
+	
+	
 }

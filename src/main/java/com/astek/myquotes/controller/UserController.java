@@ -30,7 +30,7 @@ import com.astek.myquotes.security.Role;
 import com.astek.myquotes.services.EmailSenderService;
 import com.astek.myquotes.services.UsersService;
 import com.astek.myquotes.utility.Log;
-import com.astek.myquotes.utility.ResBundle;
+import com.astek.myquotes.utility.bundles.ResDataBundle;
 
 @Controller
 @RequestMapping("/user")
@@ -110,6 +110,9 @@ public class UserController {
 			user.setRole(Role.ROLE_USER);
 			user.setEnable(Boolean.FALSE);
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			String email = user.getEmail().toLowerCase();
+			email = email.replaceAll("\\s", "");
+			user.setEmail(email);
 			userService.save(user);			
 			
 
@@ -121,12 +124,11 @@ public class UserController {
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setTo(user.getEmail());
 			mailMessage.setSubject("Finissez votre inscription "+ user.getLogin() +"!");
-			mailMessage.setFrom(ResBundle.getMyQuoteEmail());
+			mailMessage.setFrom(ResDataBundle.getMyQuoteEmail());
 //			mailMessage.setText("To confirm your account, please click here : "
 //					+ "http://localhost:8080/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
 			
-			mailMessage.setText("Pour valider votre inscription cliquez sur le lien suivant : "
-					+ ResBundle.getUrl() + "/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
+			mailMessage.setText(ResDataBundle.getEmailMessageStart() + ResDataBundle.getUrl() + "/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
 			emailSenderService.sendEmail(mailMessage);
 
 //			modelAndView.addObject("emailId", user.getEmail());

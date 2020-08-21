@@ -45,6 +45,7 @@ public class Auteur {
 	/* Si l'auteur n'est pas un utilisateur de l'application */
 	@Column(name = "AUTEUR_PRENOM", length = 150)
 	private String prenom;
+	
 	@Column(name = "AUTEUR_NOM", length = 150)
 	private String nom;
 
@@ -80,8 +81,10 @@ public class Auteur {
 		this.nom = nom;
 	}
 	
-	public Auteur(Utilisateur utilisateur) {
+	public Auteur(String prenom, String nom, Utilisateur utilisateur) {
 		super();
+		this.prenom = prenom;
+		this.nom = nom;
 		this.utilisateur = utilisateur;
 	}
 
@@ -125,16 +128,16 @@ public class Auteur {
 		this.version = version;
 	}
 
-	@Override
-	public String toString() {
-		if(getNom() != null && getPrenom() != null) {
-			return "Auteur [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", version=" + version + "]";
-		} else if (getUtilisateur() != null) {
-			return "Auteur [id=" + id + ", prenom=" + utilisateur.getPrenom() + ", nom=" + utilisateur.getNom() + ", login=" + utilisateur.getLogin() + ", version=" + version + "]";
-		}else {
-			return "Auteur [id=" + id + "null]";
-		}	
-	}	
+//	@Override
+//	public String toString() {
+//		if(getNom() != null && getPrenom() != null) {
+//			return "Auteur [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", version=" + version + "]";
+//		} else if (getUtilisateur() != null) {
+//			return "Auteur [id=" + id + ", prenom=" + utilisateur.getPrenom() + ", nom=" + utilisateur.getNom() + ", login=" + utilisateur.getLogin() + ", version=" + version + "]";
+//		}else {
+//			return "Auteur [id=" + id + "null]";
+//		}	
+//	}	
 	
 	public boolean isUtilisateur() {
 		if (getUtilisateur() != null) {
