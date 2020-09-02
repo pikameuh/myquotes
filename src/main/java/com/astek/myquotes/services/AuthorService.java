@@ -1,5 +1,6 @@
 package com.astek.myquotes.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class AuthorService {
 		}
 		return null;
 
+	}
+
+	public List<Auteur> findAll() {
+		// TODO Auto-generated method stub
+		return authorRepository.findAll();
 	}	
 
 }

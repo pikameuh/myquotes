@@ -38,7 +38,8 @@ public class UsersService {
 		if (opt.isPresent()) {
 			return opt.get();
 		}
-		return new Utilisateur();
+//		return new Utilisateur();
+		return null;
 
 	}
 	
@@ -47,8 +48,18 @@ public class UsersService {
 		if (opt.isPresent()) {
 			return opt.get();
 		}
-		return new Utilisateur();
+		//return new Utilisateur();
+		return null;
 
+	}
+
+	public Utilisateur findByNickname(String nickname) {
+		Optional<Utilisateur> opt = usersRepository.findByNickname(nickname);
+		if (opt.isPresent()) {
+			return opt.get();
+		}
+		//return new Utilisateur();
+		return null;
 	}
 
 }

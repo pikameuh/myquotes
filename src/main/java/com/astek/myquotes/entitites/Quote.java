@@ -191,6 +191,12 @@ public Quote(String titre, String value, String contexte, String lieu, Boolean p
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Quote [titre=" + titre + ", value=" + value + ", contexte=" + contexte + ", lieu=" + lieu + ", privee="
+				+ privee + ", dtEvenement=" + dtEvenement + ", dtCreation=" + dtCreation + ", auteur=" + auteur + "]";
+	}
 	
 	
 

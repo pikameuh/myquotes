@@ -41,6 +41,9 @@ public class Auteur {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAuteur")
 	@Column(name = "AUTEUR_ID")
 	private Integer id;
+	
+	@Column(name = "AUTEUR_NOM_ARTISTE", length = 150)
+	private String nickname;
 
 	/* Si l'auteur n'est pas un utilisateur de l'application */
 	@Column(name = "AUTEUR_PRENOM", length = 150)
@@ -75,17 +78,27 @@ public class Auteur {
 	public Auteur() {
 	}
 
-	public Auteur(String prenom, String nom) {
+	public Auteur(String nickname, String prenom, String nom) {
 		super();
+		this.nickname = nickname;
 		this.prenom = prenom;
 		this.nom = nom;
 	}
 	
-	public Auteur(String prenom, String nom, Utilisateur utilisateur) {
+	public Auteur(String nickname, String prenom, String nom, Utilisateur utilisateur) {
 		super();
+		this.nickname = nickname;
 		this.prenom = prenom;
 		this.nom = nom;
 		this.utilisateur = utilisateur;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public Integer getId() {

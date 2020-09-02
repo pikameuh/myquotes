@@ -12,4 +12,6 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Intege
 	Optional<Utilisateur> findByEmail(String email);
 	
 	void deleteByLogin(String login);
+
+	Optional<Utilisateur> findByNickname(String nickname);
 }

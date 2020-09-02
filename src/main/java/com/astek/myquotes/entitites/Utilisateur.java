@@ -37,6 +37,9 @@ public class Utilisateur {
 	@Column(name="UTILISATEUR_ID")
 	private Integer id;
 	
+	@Column(name="UTILISATEUR_NOM_AFFICHAGE", length = 150, nullable = false)
+	private String nickname;
+	
 	@Column(name="UTILISATEUR_PRENOM", length = 150, nullable = false)
 	private String prenom;
 	
@@ -77,9 +80,10 @@ public class Utilisateur {
 
 	}
 
-	public Utilisateur(String prenom, String nom, String login, String password, String email, Boolean enable, String dtNaiss, String dateCrea,
+	public Utilisateur(String nickname, String prenom, String nom, String login, String password, String email, Boolean enable, String dtNaiss, String dateCrea,
 			Role role) throws ParseException {
 		super();
+		this.nickname = nickname;
 		this.prenom = prenom;
 		this.nom = nom;
 		this.login = login;
@@ -92,6 +96,14 @@ public class Utilisateur {
 	}
 
 
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
 	public Integer getId() {
 		return id;
@@ -207,7 +219,7 @@ public class Utilisateur {
 	}
 
 	public boolean isEmpty() {
-		if (getLogin() == null) {
+		if (getLogin() == null || getLogin().isEmpty()) {
 			return true;
 		}
 		

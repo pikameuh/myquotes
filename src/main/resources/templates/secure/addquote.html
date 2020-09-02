@@ -1,56 +1,69 @@
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
 <head>
-<meta charset="UTF-8">
-<title>CRUD</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-	crossorigin="anonymous"></script>
+<title>MyQuotes - Nouvelle quote</title>
 </head>
 <body>
-	<div class="container">
-		<h1>Page CRUD</h1>
-		<h2>Bonjour [[${#authentication.getPrincipal().getUsername()}]] </h2>
-		
-		
-		<table class="table">
-			<tr>
-				<th>login</th>
-				<th>password</th>
-			</tr>
-			<tr th:each="user:${users}">
-				<td>[[${user.login}]]</td>
-			<!-- 	<td th:utext="${user.login}"></td> -->
-				<td th:utext="${user.password}"></td>
-				<!-- <td><a th:href="@{/user/edit(id=${user.login})}"
-					class="btn btn-outline-primary">editer</a></td>
-				<td><a th:href="@{/user/delete(id=${user.login})}"
-					class="btn btn-outline-danger">supprimer</a></td> -->
-			</tr>
-		</table>
-		
-		<div class="form-group" sec:authorize="hasRole('ROLE_ADMIN')">
-			<a th:href="@{/secure/info}" class="btn btn-outline-primary">Add</a>
-			<a th:href="@{/secure/info}" class="btn btn-outline-warning">Delete</a>
-		</div>			
-		
-		<div class="form-group">
-			<a th:href="@{/secure/info}" class="btn btn-outline-secondary">retour</a>
-			<a th:href="@{/logout}" class="btn btn-outline-warning">logout</a>
-		</div>
-		
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				<h1>En avant pour une nouvelle quote historique !</h1>
+				</br>
+				<form th:action="@{/secure/savequote}" th:object="${quote}" method="post"> 
+
+
+					<div class="form-group">
+						<label for="privee">quote privee ?</label> <input type="checkbox" th:field="*{privee}" th:readonly="*{privee}" >
+						<div th:if="${#fields.hasErrors('privee')}" class="alert alert-danger">champs privee obligatoire</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="titre">titre:</label> <input th:field="*{titre}" th:readonly="*{titre}" class="form-control">
+						<div th:if="${#fields.hasErrors('titre')}" class="alert alert-danger">titre obligatoire</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="value">quote:</label> <input th:field="*{value}" th:readonly="*{value}" class="form-control">
+						<div th:if="${#fields.hasErrors('value')}" class="alert alert-danger">quote obligatoire</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="contexte">contexte:</label> <input th:field="*{contexte}" th:readonly="*{contexte}" class="form-control">
+						<div th:if="${#fields.hasErrors('value')}" class="alert alert-danger">contexte obligatoire</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="lieu">lieu:</label> <input th:field="*{lieu}" th:readonly="*{lieu}" class="form-control">
+						<div th:if="${#fields.hasErrors('lieu')}" class="alert alert-danger">lieu obligatoire</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="dtEvenement">date de l'evenement:</label> <input type="date" class="form-control" th:field="*{dtEvenement}" required>
+						<div th:if="${#fields.hasErrors('dtEvenement')}" class="alert alert-danger">date de l'évenement</div>
+					</div> 
+					
+					<div class="form-group">
+						<label for="auteur">auteur:</label> <select class="form-control" th:field="*{auteur}"  id="auteur">
+    					<!-- 	<option value="0">Choisissez un auteur</option> -->
+    						<option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.nickname}"></option>
+    					</select>					
+					</div>
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-outline-success">enregistrer</button>
+						<a th:href="@{/index}" class="btn btn-outline-warning">annuler</a>
+					</div>
+
+
+
+					<!-- <p th:if="${#fields.hasErrors('dtNaiss')}" th:errors="*{dtNaiss}" th:class="'error'">something</p> -->
+
+				</form>
+			</div>
+		</section>
 	</div>
 </body>
 </html>

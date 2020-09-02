@@ -102,7 +102,12 @@ public class DaoQuoteImpl implements DaoQuote {
 		if (keyword != null) {
 			Log.debug("keyword="+keyword);
 
-			if (keyword.contains(" ")) {
+			if (keyword.replace("+", "").replace(" ", "").replace("*", "").isEmpty()) {
+				String req = "SELECT q FROM Quote q WHERE q.privee= 'true'";
+				 Log.debug("SQL : " + req);
+				Query selectQuery  = em.createQuery(req);				
+				return selectQuery.getResultList();
+			}else if (keyword.contains(" ")) {
 				Log.debug("** search multi");
 				
 //				String req = "select q from Quote q where q.privee=:public ";
@@ -112,14 +117,14 @@ public class DaoQuoteImpl implements DaoQuote {
 			     while (st.hasMoreTokens()) {
 			    	 String tmp = st.nextToken();
 			    	 if(!tmp.isEmpty()) {
-			    		req += closeFacto + "'%" + tmp + "%'" + " or ";
+			    		req += closeFacto + " '%" + tmp + "%'" + " or ";
 			    	 }
 			     }
 			     req = req.substring(0, req.length() - 3);
 			     
 			     req += ") and q.privee= 'true'";
 			     
-			     Log.debug("REQ : " + req);
+			     Log.debug("SQL : " + req);
 			     
 				Query selectQuery  = em.createQuery(req);				
 				return selectQuery.getResultList();

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.astek.myquotes.entitites.Quote;
+import com.astek.myquotes.entitites.Utilisateur;
 import com.astek.myquotes.repositories.QuoteRepository;
 
 @Service
@@ -32,5 +33,12 @@ public class QuotesService {
 			return repo.searchInAllPublic(sqlReqAttr);
 		}
 		return repo.findAll();
+	}
+	
+	
+	
+	public void save(Quote quote) {
+		System.out.println("try to save Quote : " + quote.toString());
+		repo.save(quote);
 	}
 }

@@ -92,18 +92,15 @@ public class UserController {
 	}
 
 	@PostMapping("/save")
-	public String save(@Valid @ModelAttribute("user") Utilisateur user, BindingResult br, Model model) {
-		
-		Log.debug("dtNaiss : " + user.getDtNaiss().toString());
-		
+	public String save(@Valid @ModelAttribute("user") Utilisateur user, BindingResult br, Model model) {	
 		
 		if (br.hasErrors()) {
 			return goEdit(user, model);
 		}
 		// Check if login + @mail do not exist in DB
 		Utilisateur existingEmailUser = userService.findByEmail(user.getEmail());
-		Utilisateur existingLoginUser = userService.findById(user.getLogin());
-		if (existingEmailUser.isEmpty() && existingLoginUser.isEmpty()) {
+		Utilisateur existingNicknameUser = userService.findByNickname(user.getNickname());
+		if (existingEmailUser==null && existingNicknameUser==null) {
 			// Create the new user
 			// set date and role, desactivate it and crypt password
 			user.setDtCreation(new Date());
@@ -123,7 +120,7 @@ public class UserController {
 
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setTo(user.getEmail());
-			mailMessage.setSubject("Finissez votre inscription "+ user.getLogin() +"!");
+			mailMessage.setSubject("Finissez votre inscription "+ user.getNickname() +" !");
 			mailMessage.setFrom(ResDataBundle.getMyQuoteEmail());
 //			mailMessage.setText("To confirm your account, please click here : "
 //					+ "http://localhost:8080/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
@@ -137,7 +134,7 @@ public class UserController {
 			
 
 		} else {
-			System.out.println("Can't create user - email or login already exists");
+			System.out.println("Can't create user nickname or email or login already exists");
 //			modelAndView.addObject("message","This email already exists!");
 //            modelAndView.setViewName("error");
 			return "error";

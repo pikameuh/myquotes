@@ -53,6 +53,7 @@ public class MainController {
 	
 	@GetMapping("/search")
 	public String search() {
+		String s = "";
 		return "open/searchQuote";
 	}
 	

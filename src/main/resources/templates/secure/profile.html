@@ -10,13 +10,14 @@
 	<div layout:fragment="content">
 		<section class="my-5">
 			<div class="container">
-		<h2>Bonjour [[${#authentication.getPrincipal().getUsername()}]] </h2>
-		
+		<h2>Bonjour [[${user.nickname}]]  </h2> <!-- [[${#authentication.getPrincipal().getUsername()}]] -->
+		</br>
 		<div class="form-group">
 							
 			<b>Utilisateur</b>		
 			<table class="table">
 			<tr>
+				<th>nom d'affichage</th>
 				<th>login</th>
 				<th>email</th>
 				<th>nom</th>
@@ -26,11 +27,13 @@
 				<th>inscription</th>
 			</tr>
 			<tr >
+				<td th:utext="${user.nickname}"></td>
 				<td>[[${user.login}]]</td>
 				<td th:utext="${user.email}"></td>
 				<td th:utext="${user.nom}"></td>
 				<td th:utext="${user.prenom}"></td>
-				<td th:utext="${user.role}"></td>				
+				<td th:utext="${#strings.substring(user.role.toString().toLowerCase(), 5, user.role.toString().length())}"></td>		
+				 		
 				<td th:text="${#dates.format(user.dtNaiss, 'dd MMM yyyy')}"></td>
 				<td th:text="${#dates.format(user.dtCreation, 'dd MMM yyyy')}"></td>
 			</tr>
@@ -39,23 +42,21 @@
 			<b th:if= "${author != null}">Auteur</b>		
 			<table th:if= "${author != null}" class="table">
 			<tr >
-				
-				<th> ${author}</th>
 				<th>id</th>
+				<th>nom d'artiste</th>
 				<th>nom</th>
 				<th>prenom</th>
 				<th>utilisateur</th>
-				<th>quotes</th>
+				<th>nombre de quote</th>
 				
 			</tr>
 			<tr >
-				
-				<td th:utext="${author}"></td>
 				<td th:utext="${author.id}"></td>
+				<td th:utext="${author.nickname}"></td>
 				<td th:utext="${author.nom}"></td>
 				<td th:utext="${author.prenom}"></td>
 				<td th:utext="${author.utilisateur.login}"></td>
-				<td th:utext="${author.quotes}"></td>
+				<td th:utext="${author.quotes.size()}"></td>
 				
 			</tr>
 			</table>

@@ -44,21 +44,21 @@ public class InitUtilisateur implements CommandLineRunner {
 //		u = new Utilisateur("admin", "admin", passwordEncoder.encode("admin"), Role.ROLE_ADMIN);
 //		utilisateurRepository.save(u);
 
-		Utilisateur uToto = new Utilisateur("toto", "toto", "toto", passwordEncoder.encode("toto"), "toto@gmail.com", Boolean.TRUE, "25/07/19990",
+		Utilisateur uToto = new Utilisateur("toto", "toto", "toto", "toto", passwordEncoder.encode("toto"), "toto@gmail.com", Boolean.TRUE, "25/07/19990",
 				"08/08/2020", Role.ROLE_USER);
 		uToto = utilisateurRepository.save(uToto);
 
-		Utilisateur uAdmin = new Utilisateur("admin", "admin", "admin", passwordEncoder.encode("admin"), "admin@gmail.com", Boolean.TRUE, "25/07/19990",
+		Utilisateur uAdmin = new Utilisateur("admin", "admin", "admin", "admin", passwordEncoder.encode("admin"), "admin@gmail.com", Boolean.TRUE, "25/07/19990",
 				"08/08/2020", Role.ROLE_ADMIN);
 		uAdmin = utilisateurRepository.save(uAdmin);
 
-		Auteur aToto = new Auteur(uToto.getPrenom(), uToto.getNom(), uToto);
+		Auteur aToto = new Auteur("quoteCreator3000", uToto.getPrenom(), uToto.getNom(), uToto);
 		aToto = auteurRepository.save(aToto);
 
-		Auteur aHugo = new Auteur("victor", "hugo");
+		Auteur aHugo = new Auteur("victor hugo", "victor", "hugo");
 		aHugo = auteurRepository.save(aHugo);
 
-		Auteur aXXX = new Auteur("xxx", "xxxx");
+		Auteur aXXX = new Auteur("yyy", "xxx", "xxxx");
 		aXXX = auteurRepository.save(aXXX);
 
 		Tag tDrole = new Tag("drole", "quand c'est rigolo", uToto);
@@ -75,7 +75,7 @@ public class InitUtilisateur implements CommandLineRunner {
 		// ---
 		retrieveTagFromUtilisateur(uToto);
 		// ---
-		retrieveQuotesFromAuteur(aHugo);
+//		retrieveQuotesFromAuteur(aHugo);
 
 	}
 	
@@ -103,27 +103,30 @@ public class InitUtilisateur implements CommandLineRunner {
 
 	private void createQuotes(Auteur auteur) throws ParseException {
 
-		Boolean b;
-		for (int i = 0; i < 250; i++) {
-
-			if (i % 3 == 0) {
-				b = Boolean.FALSE;
-			} else {
-				b = Boolean.TRUE;
-			}
-			Quote q1 = new Quote("De  #" + i, randomQuote(i), randomContext(i), "a pairs", b,
-					"20/02/1984", "11/12/2019", auteur);
-
-			q1 = quoteRepository.save(q1);
-
-		}
+//		Boolean b;
+//		for (int i = 0; i < 250; i++) {
+//
+//			if (i % 3 == 0) {
+//				b = Boolean.FALSE;
+//			} else {
+//				b = Boolean.TRUE;
+//			}
+//			Quote q1 = new Quote("De  #" + i, randomQuote(i), randomContext(i), "a paris", b,
+//					"20/02/1984", "11/12/2019", auteur);
+//
+//			q1 = quoteRepository.save(q1);
+//
+//		}
+		int i = 1;
+		Quote q1 = new Quote("De  #" + i, randomQuote(i), randomContext(i), "a paris", Boolean.TRUE ,"20/02/1984", "11/12/2019", auteur);
+		q1 = quoteRepository.save(q1);
 
 	}
 
 	private void retrieveQuotesFromAuteur(Auteur auteur) {
 		List<Quote> lQuote = quoteRepository.findAll();// quoteRepository.findByAuteur(auteur);
 		System.out.println("*******************************************");
-		System.out.println("        Quotes de " + auteur.toString());
+		System.out.println("        Quotes de " + auteur.getNickname());
 		System.out.println("*******************************************");
 		for (Quote q : lQuote) {
 			System.out.println(q.toString());

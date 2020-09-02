@@ -13,6 +13,11 @@
 				<h1>yoooooo !</h1>
 				</br>
 				<form th:action="@{/user/save}" th:object="${user}" method="post">
+			
+			<div class="form-group">
+				<label for="nickname">nom d'afichage:</label> <input th:field="*{nickname}" th:readonly="*{nickname}" class="form-control">
+				<div th:if="${#fields.hasErrors('nickname')}" class="alert alert-danger">nickname obligatoire</div>
+			</div>
 			<div class="form-group">
 				<label for="login">login:</label> <input th:field="*{login}"
 					th:readonly="*{login}" class="form-control">
@@ -45,7 +50,7 @@
 			</div>
 			
 			
-			 <p th:if="${#fields.hasErrors('dtNaiss')}" th:errors="*{dtNaiss}" th:class="'error'">something</p>
+			<!--  <p th:if="${#fields.hasErrors('dtNaiss')}" th:errors="*{dtNaiss}" th:class="'error'">something</p> -->
 			 
 		</form>
 			</div>
