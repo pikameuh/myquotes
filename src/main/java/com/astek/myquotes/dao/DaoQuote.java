@@ -9,4 +9,6 @@ public interface DaoQuote extends DaoGeneric<Quote, Integer>{
 	Quote findRandomQuote(Boolean onlyPublicQuotes);
 	
 	List<Quote> searchByKeyword(String keyword);
+
+	long numberOfPublicQuote();
 }

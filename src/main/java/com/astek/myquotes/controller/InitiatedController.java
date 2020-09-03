@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 public class InitiatedController {
 
-	
+	/**
+	 * Allow to retrieve String "yyy-MM-dd" format from HTML formular
+	 * @param binder
+	 */
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

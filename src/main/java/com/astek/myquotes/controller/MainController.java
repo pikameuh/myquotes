@@ -32,10 +32,12 @@ public class MainController {
 			List<Quote> quotes = daoQuote.searchByKeyword(keyword);
 			model.addAttribute("quotes", quotes);
 			model.addAttribute("keyword", keyword);
+			model.addAttribute("numberPublicQuote", daoQuote.numberOfPublicQuote());
 			return "index";
 		}else {
 			//model.addAttribute("quotes", quoteRepository.findByPrivee(Boolean.TRUE));
 			model.addAttribute("quotes", daoQuote.findRandomQuote(Boolean.TRUE));
+			model.addAttribute("numberPublicQuote", daoQuote.numberOfPublicQuote());
 			return "index";
 		}
 		

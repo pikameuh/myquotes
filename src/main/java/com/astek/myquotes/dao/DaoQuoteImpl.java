@@ -137,4 +137,12 @@ public class DaoQuoteImpl implements DaoQuote {
 			return null;
 		}
 	}
+
+	@Override
+	public long numberOfPublicQuote() {
+		Query countQuery = em.createQuery("select count(*) from Quote");
+		long count = (long) countQuery.getSingleResult();
+		System.out.println("******* " + count);
+		return count;
+	}
 }

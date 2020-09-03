@@ -4,6 +4,7 @@
 	layout:decorate="~{layout}">
 <head>
 <title>MyQuotes - Accueil</title>
+<meta charset="utf-8">
 
 </head>
 <body>
@@ -35,6 +36,7 @@
 		</ul>
 		
 		<a th:href="@{/}" class="btn btn-outline-primary right">Random quote</a>
+		<span class="right">Il y a [[${numberPublicQuote}]] quotes enregistrées sur ce site</span>
 		</br>
 		</br>
 	</div>
