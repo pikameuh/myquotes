@@ -34,7 +34,7 @@ import com.astek.myquotes.utility.bundles.ResDataBundle;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends InitiatedController {
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -164,12 +164,12 @@ public class UserController {
 
         return "redirect:/index?successfulregistration=true";        
     }
-	
-	@InitBinder
-    public void initBinder(WebDataBinder binder) {
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(true);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-    }
+//	
+//	@InitBinder
+//    public void initBinder(WebDataBinder binder) {
+////        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        sdf.setLenient(true);
+//        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+//    }
 }
