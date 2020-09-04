@@ -15,11 +15,11 @@
 		
 		<ul>
 
-			<blockquote th:each="quote:${quotes}" class="color-div" th:styleappend="${quote.privee} ? 'background:white;':'background:gray;'">
+			<blockquote th:each="quote:${quotes}" class="color-div" th:styleappend="${!quote.privee} ? 'background:white;':'background:gray;'">
 				<img th:src="@{img/avatars/avatar1.png}" class="avatar-quote" width="50" height="50" /> 
 				
-					<small class="right" th:if="${quote.privee}">[publique]</small> 
-					<small class="right" th:if="${!quote.privee}">[privee]</small> 
+					<small class="right" th:if="${!quote.privee}">[publique]</small> 
+					<small class="right" th:if="${quote.privee}">[privee]</small> 
 						<small class="dddate">[	[[${quote.dtEvenement}]] ] </small> 
 						
 					<b><i class="titre">[[${quote.titre}]]:</i></b>

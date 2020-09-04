@@ -120,6 +120,10 @@ public class InitUtilisateur implements CommandLineRunner {
 		int i = 1;
 		Quote q1 = new Quote("De  #" + i, randomQuote(i), randomContext(i), "a paris", Boolean.TRUE ,"20/02/1984", "11/12/2019", auteur);
 		q1 = quoteRepository.save(q1);
+		
+		i++;
+		Quote q2 = new Quote("De  #" + i, randomQuote(i), randomContext(i), "a paris", Boolean.FALSE ,"20/02/1984", "11/12/2019", auteur);
+		q2 = quoteRepository.save(q2);
 
 	}
 

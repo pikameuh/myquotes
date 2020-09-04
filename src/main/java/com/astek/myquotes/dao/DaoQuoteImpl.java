@@ -32,8 +32,8 @@ public class DaoQuoteImpl implements DaoQuote {
 
 		Query countQuery;
 		if (onlyPublicQuotes) {
-			countQuery = em.createQuery("select count(*) from Quote q where q.privee=:public");
-			countQuery.setParameter("public", onlyPublicQuotes);
+			countQuery = em.createQuery("select count(*) from Quote q where q.privee='false'");
+		//	countQuery.setParameter("public", Boolean.);
 		} else {
 			countQuery = em.createQuery("select count(*) from Quote");
 		}
@@ -49,8 +49,8 @@ public class DaoQuoteImpl implements DaoQuote {
 
 		Query selectQuery;
 		if (onlyPublicQuotes) {
-			selectQuery = em.createQuery("select q from Quote q where q.privee=:public");
-			selectQuery.setParameter("public", onlyPublicQuotes);
+			selectQuery = em.createQuery("select q from Quote q where q.privee='false'");
+			//selectQuery.setParameter("public", onlyPublicQuotes);
 		} else {
 			selectQuery = em.createQuery("select q from Quote q");
 		}
@@ -103,7 +103,7 @@ public class DaoQuoteImpl implements DaoQuote {
 			Log.debug("keyword="+keyword);
 
 			if (keyword.replace("+", "").replace(" ", "").replace("*", "").isEmpty()) {
-				String req = "SELECT q FROM Quote q WHERE q.privee= 'true'";
+				String req = "SELECT q FROM Quote q WHERE q.privee= 'false'";
 				 Log.debug("SQL : " + req);
 				Query selectQuery  = em.createQuery(req);				
 				return selectQuery.getResultList();
@@ -122,7 +122,7 @@ public class DaoQuoteImpl implements DaoQuote {
 			     }
 			     req = req.substring(0, req.length() - 3);
 			     
-			     req += ") and q.privee= 'true'";
+			     req += ") and q.privee= 'false'";
 			     
 			     Log.debug("SQL : " + req);
 			     
