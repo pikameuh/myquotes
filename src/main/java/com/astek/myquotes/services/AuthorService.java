@@ -27,6 +27,10 @@ public class AuthorService {
 	public List<Auteur> findAll() {
 		// TODO Auto-generated method stub
 		return authorRepository.findAll();
-	}	
+	}
+	
+	public void save(Auteur auteur) {
+		authorRepository.save(auteur);
+	}
 
 }
