@@ -14,6 +14,7 @@
 		
 		
 		<ul>
+			<b th:if= "${error != null}">[[${error}]]</b>		 
 
 			<blockquote th:each="quote:${quotes}" class="color-div" th:styleappend="${!quote.privee} ? 'background:white;':'background:gray;'">
 				<img th:src="@{img/avatars/avatar1.png}" class="avatar-quote" width="50" height="50" /> 
@@ -40,13 +41,6 @@
 		</br>
 		</br>
 	</div>
-
-	<!-- $(document).ready(function() {
-  var colors = ['red', 'blue', 'green', 'yellow', 'cyan', 'orange'];
-  var new_color = colors[Math.floor(Math.random() * colors.length)];
-  $('.color-div').css('background-color', new_color);
-}); -->
-
 </body>
 </html>
 

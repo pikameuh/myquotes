@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.astek.myquotes.entitites.Quote;
 import com.astek.myquotes.repositories.QuoteRepository;
 import com.astek.myquotes.utility.Log;
+import com.astek.myquotes.utility.SQL_CTE;
 
 @Repository
 public class DaoQuoteImpl implements DaoQuote {
@@ -103,7 +104,7 @@ public class DaoQuoteImpl implements DaoQuote {
 			Log.debug("keyword="+keyword);
 
 			if (keyword.replace("+", "").replace(" ", "").replace("*", "").isEmpty()) {
-				String req = "SELECT q FROM Quote q WHERE q.privee= 'false'";
+				String req = SQL_CTE.selectQuotePublic;
 				 Log.debug("SQL : " + req);
 				Query selectQuery  = em.createQuery(req);				
 				return selectQuery.getResultList();
@@ -111,7 +112,7 @@ public class DaoQuoteImpl implements DaoQuote {
 				Log.debug("** search multi");
 				
 //				String req = "select q from Quote q where q.privee=:public ";
-				String closeFacto = "CONCAT(q.value, q.contexte, q.lieu, q.titre, CONCAT(q.dtEvenement, ''), CONCAT(q.dtCreation, ''), q.auteur.prenom ) LIKE ";
+				String closeFacto = SQL_CTE.concatSearch + " LIKE ";
 				String req = "SELECT q FROM Quote q WHERE (";
 				StringTokenizer st=new StringTokenizer(keyword," ");
 			     while (st.hasMoreTokens()) {

@@ -30,7 +30,11 @@ public class MainController {
 		if(keyword != null) {
 //			List<Quote> quotes = quoteService.listAll(keyword);
 			List<Quote> quotes = daoQuote.searchByKeyword(keyword);
-			model.addAttribute("quotes", quotes);
+			if ( quotes.size() > 0 ) {
+				model.addAttribute("quotes", quotes);
+			} else {
+				model.addAttribute("error", "Aucune quote n'a était trouvée");
+			}
 			model.addAttribute("keyword", keyword);
 			model.addAttribute("numberPublicQuote", daoQuote.numberOfPublicQuote());
 			return "index";

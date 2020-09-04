@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.astek.myquotes.entitites.Quote;
+import com.astek.myquotes.utility.SQL_CTE;
 
 public interface QuoteRepository extends JpaRepository<Quote, Integer> {
 
@@ -18,10 +19,10 @@ public interface QuoteRepository extends JpaRepository<Quote, Integer> {
 //	List<Quote> findByAuteur(Auteur auteur);
 //	
 //	void deleteByAuteur(Auteur tauteuritre);
-	@Query("SELECT q FROM Quote q WHERE CONCAT(q.value, q.contexte, q.lieu, q.titre, CONCAT(q.dtEvenement, ''), CONCAT(q.dtCreation, ''), q.auteur.prenom ) LIKE %?1% AND (q.privee = 'false')")
+	@Query(SQL_CTE.selectQuoteLike + " %?1% AND (q.privee = 'false')")
 	public List<Quote> searchInAllPublic(String keyword);
 
-	@Query("SELECT q FROM Quote q WHERE CONCAT(q.value, q.contexte, q.lieu, q.titre, CONCAT(q.dtEvenement, ''), CONCAT(q.dtCreation, ''), q.auteur.prenom ) LIKE %?1% ")
+	@Query(SQL_CTE.selectQuoteLike + " %?1% ")
 	public List<Quote> searchInAll(String keyword);
 
 }
